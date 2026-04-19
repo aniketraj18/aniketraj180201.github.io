@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<git add index.html
+git commit -m "Add portfolio"
+git push origin main
+rt" content="width=device-width, initial-scale=1.0"/>
+  <title>Aniket Raj — Data Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0b0c0f;
+      --paper: #f4f0e8;
+      --accent: #d44f2e;
+      --accent2: #2e6fd4;
+      --muted: #6b6760;
+      --border: #c8c3b8;
+      --card: #ede9df;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(244,240,232,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 6rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-subtitle {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 1px solid;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--paper);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .btn-secondary:hover { background: var(--ink); color: var(--paper); }
+
+    .hero-right {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-visual {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pipeline-svg {
+      width: 90%; max-width: 520px;
+      opacity: 0.9;
+      animation: floatUp 6s ease-in-out infinite;
+    }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    .hero-stats {
+      position: absolute; bottom: 3rem; left: 6rem;
+      display: flex; gap: 3rem;
+      z-index: 2;
+    }
+    .stat { text-align: left; }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* SECTION COMMONS */
+    section { padding: 6rem 6rem; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    .section-label::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--accent); }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* EXPERIENCE */
+    #experience { background: var(--ink); color: var(--paper); }
+    #experience .section-label { color: #d44f2e; }
+    #experience .section-label::after { background: #d44f2e; }
+    #experience .section-title { color: var(--paper); }
+
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 4rem; }
+    .exp-card {
+      background: #141519;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .exp-card:hover { background: #1a1d24; }
+    .exp-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--accent);
+    }
+    .exp-card.blue::before { background: var(--accent2); }
+    .exp-period {
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .exp-card.blue .exp-period { color: #6aa3e8; }
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--paper);
+      margin-bottom: 0.25rem;
+    }
+    .exp-company {
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+    .exp-items { list-style: none; }
+    .exp-items li {
+      font-size: 12px;
+      color: #a8a5a0;
+      padding: 0.4rem 0;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.6;
+      border-bottom: 1px solid #1f2228;
+    }
+    .exp-items li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 0.45rem; }
+    .exp-card.blue .exp-items li::before { color: #6aa3e8; }
+    .exp-highlight {
+      display: inline-block;
+      background: rgba(212,79,46,0.15);
+      color: #e88a6a;
+      font-size: 10px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .exp-card.blue .exp-highlight { background: rgba(46,111,212,0.15); color: #6aa3e8; }
+
+    /* SKILLS */
+    #skills { background: var(--paper); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .skill-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .skill-block:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    }
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .skill-block-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 10px;
+      padding: 0.25rem 0.6rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .tag:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .tag.hot { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+
+    /* PROJECTS / HIGHLIGHTS */
+    #projects { background: #f9f5ed; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 4rem; }
+    .proj-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-num {
+      font-family: 'Fraunces', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      position: absolute; top: 1.5rem; right: 1.5rem;
+    }
+    .proj-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.15rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .proj-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      max-width: 80%;
+    }
+    .proj-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .proj-impact {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--ink);
+    }
+    .proj-impact span { color: var(--accent); }
+    .proj-impact-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements { background: var(--ink); }
+    #achievements .section-title { color: var(--paper); }
+    #achievements .section-label { color: var(--accent); }
+    #achievements .section-label::after { background: var(--accent); }
+
+    .ach-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 4rem;
+      background: #1f2228;
+    }
+    .ach-card {
+      background: #0b0c0f;
+      padding: 2.5rem;
+      transition: background 0.3s;
+    }
+    .ach-card:hover { background: #141519; }
+    .ach-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .ach-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .ach-desc { font-size: 12px; color: #888; line-height: 1.6; }
+
+    /* EDUCATION */
+    #education {
+      background: var(--paper);
+      display: flex; align-items: center; gap: 6rem;
+    }
+    .edu-left { flex: 1; }
+    .edu-right {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 3rem;
+    }
+    .edu-degree {
+      font-family: 'Fraunces', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .edu-school {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .edu-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .edu-chip {
+      font-size: 11px;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem;
+      color: var(--muted);
+    }
+    .edu-chip.accent { border-color: var(--accent); color: var(--accent); }
+
+    /* CONTACT */
+    #contact {
+      background: var(--accent);
+      color: var(--paper);
+      text-align: center;
+      padding: 6rem;
+    }
+    #contact .section-label { justify-content: center; color: rgba(255,255,255,0.6); }
+    #contact .section-label::after { background: rgba(255,255,255,0.4); }
+    #contact .section-title { color: var(--paper); margin-bottom: 1rem; }
+    #contact .section-title em { color: rgba(255,255,255,0.6); font-style: italic; }
+    .contact-sub { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 3rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--paper);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .contact-link:hover { background: var(--paper); color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      color: #444;
+      text-align: center;
+      padding: 2rem;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* SCROLL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* TICKER */
+    .ticker {
+      background: var(--accent);
+      color: var(--paper);
+      padding: 0.6rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 25s linear infinite;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 4rem 1.5rem 2rem; }
+      .hero-right { min-height: 300px; }
+      .hero-stats { left: 1.5rem; bottom: 1.5rem; gap: 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .exp-grid, .skills-grid, .projects-grid, .ach-row { grid-template-columns: 1fr; }
+      #education { flex-direction: column; gap: 2rem; }
+      .proj-num { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Aniket<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Available for New Roles</div>
+    <h1>Aniket<br><em>Raj</em></h1>
+    <div class="hero-subtitle">Data Engineer II &nbsp;·&nbsp; Hyderabad, India</div>
+    <p class="hero-desc">
+      Building scalable data pipelines, cloud warehouses, and analytics platforms
+      that turn raw data into business intelligence — on Azure, Fabric, and beyond.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:aniketraj180201@gmail.com" class="btn btn-primary">Get in Touch</a>
+      <a href="https://www.linkedin.com/in/aniket-raj" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <svg class="pipeline-svg" viewBox="0 0 520 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid lines -->
+        <line x1="0" y1="60" x2="520" y2="60" stroke="#c8c3b8" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <line x1="0" y1="150" x2="520" y2="150" stroke="#c8c3b8" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <line x1="0" y1="240" x2="520" y2="240" stroke="#c8c3b8" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <line x1="0" y1="330" x2="520" y2="330" stroke="#c8c3b8" stroke-width="0.5" stroke-dasharray="4 4"/>
+
+        <!-- SOURCE NODES -->
+        <rect x="20" y="80" width="80" height="40" rx="3" fill="#ede9df" stroke="#c8c3b8"/>
+        <text x="60" y="104" font-family="DM Mono,monospace" font-size="9" fill="#6b6760" text-anchor="middle">REST API</text>
+
+        <rect x="20" y="140" width="80" height="40" rx="3" fill="#ede9df" stroke="#c8c3b8"/>
+        <text x="60" y="164" font-family="DM Mono,monospace" font-size="9" fill="#6b6760" text-anchor="middle">Excel / CSV</text>
+
+        <rect x="20" y="200" width="80" height="40" rx="3" fill="#ede9df" stroke="#c8c3b8"/>
+        <text x="60" y="224" font-family="DM Mono,monospace" font-size="9" fill="#6b6760" text-anchor="middle">Azure Blob</text>
+
+        <rect x="20" y="260" width="80" height="40" rx="3" fill="#ede9df" stroke="#c8c3b8"/>
+        <text x="60" y="284" font-family="DM Mono,monospace" font-size="9" fill="#6b6760" text-anchor="middle">SQL Server</text>
+
+        <!-- ARROWS TO ADF -->
+        <line x1="100" y1="100" x2="165" y2="180" stroke="#d44f2e" stroke-width="1.5" stroke-dasharray="6 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.2s" repeatCount="indefinite"/>
+        </line>
+        <line x1="100" y1="160" x2="165" y2="185" stroke="#d44f2e" stroke-width="1.5" stroke-dasharray="6 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+        </line>
+        <line x1="100" y1="220" x2="165" y2="195" stroke="#d44f2e" stroke-width="1.5" stroke-dasharray="6 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
+        </line>
+        <line x1="100" y1="280" x2="165" y2="205" stroke="#d44f2e" stroke-width="1.5" stroke-dasharray="6 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.8s" repeatCount="indefinite"/>
+        </line>
+
+        <!-- ADF BOX -->
+        <rect x="165" y="155" width="100" height="70" rx="4" fill="#d44f2e"/>
+        <text x="215" y="184" font-family="Syne,sans-serif" font-weight="700" font-size="10" fill="white" text-anchor="middle">Azure Data</text>
+        <text x="215" y="198" font-family="Syne,sans-serif" font-weight="700" font-size="10" fill="white" text-anchor="middle">Factory</text>
+        <text x="215" y="213" font-family="DM Mono,monospace" font-size="7" fill="rgba(255,255,255,0.7)" text-anchor="middle">ETL / ELT</text>
+
+        <!-- ARROW TO ADLS -->
+        <line x1="265" y1="190" x2="305" y2="190" stroke="#2e6fd4" stroke-width="2">
+          <animate attributeName="stroke-dashoffset" from="0" to="-12" dur="0.8s" repeatCount="indefinite"/>
+        </line>
+        <polygon points="305,186 315,190 305,194" fill="#2e6fd4"/>
+
+        <!-- ADLS -->
+        <rect x="315" y="155" width="90" height="70" rx="4" fill="#2e6fd4"/>
+        <text x="360" y="186" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="white" text-anchor="middle">ADLS Gen2</text>
+        <text x="360" y="200" font-family="DM Mono,monospace" font-size="7" fill="rgba(255,255,255,0.7)" text-anchor="middle">Data Lake</text>
+        <text x="360" y="213" font-family="DM Mono,monospace" font-size="7" fill="rgba(255,255,255,0.7)" text-anchor="middle">Storage</text>
+
+        <!-- ARROWS DOWN from ADLS -->
+        <line x1="360" y1="225" x2="360" y2="270" stroke="#0b0c0f" stroke-width="1.5" stroke-dasharray="5 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1s" repeatCount="indefinite"/>
+        </line>
+        <polygon points="356,270 360,280 364,270" fill="#0b0c0f"/>
+
+        <!-- Synapse -->
+        <rect x="295" y="280" width="130" height="55" rx="4" fill="#0b0c0f"/>
+        <text x="360" y="304" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="#f4f0e8" text-anchor="middle">Azure Synapse</text>
+        <text x="360" y="318" font-family="DM Mono,monospace" font-size="7" fill="#888" text-anchor="middle">Analytics · 100M+ rows</text>
+        <text x="360" y="328" font-family="DM Mono,monospace" font-size="7" fill="#888" text-anchor="middle">Star Schema · T-SQL</text>
+
+        <!-- ARROW TO POWERBI -->
+        <line x1="425" y1="307" x2="460" y2="307" stroke="#d44f2e" stroke-width="1.5">
+        </line>
+        <polygon points="460,303 470,307 460,311" fill="#d44f2e"/>
+
+        <!-- PowerBI -->
+        <rect x="470" y="280" width="40" height="55" rx="3" fill="#d44f2e"/>
+        <text x="490" y="308" font-family="Syne,sans-serif" font-weight="800" font-size="8" fill="white" text-anchor="middle">Power</text>
+        <text x="490" y="320" font-family="Syne,sans-serif" font-weight="800" font-size="8" fill="white" text-anchor="middle">BI</text>
+        <text x="490" y="330" font-family="DM Mono,monospace" font-size="6" fill="rgba(255,255,255,0.6)" text-anchor="middle">5+</text>
+
+        <!-- Fabric box -->
+        <rect x="165" y="310" width="100" height="55" rx="4" fill="#6b6760"/>
+        <text x="215" y="334" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="white" text-anchor="middle">Microsoft</text>
+        <text x="215" y="348" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="white" text-anchor="middle">Fabric</text>
+        <text x="215" y="358" font-family="DM Mono,monospace" font-size="7" fill="rgba(255,255,255,0.6)" text-anchor="middle">Lakehouse</text>
+
+        <!-- connector Fabric to Synapse -->
+        <line x1="265" y1="337" x2="295" y2="310" stroke="#c8c3b8" stroke-width="1" stroke-dasharray="4 3"/>
+
+        <!-- Python box -->
+        <rect x="165" y="55" width="80" height="50" rx="4" fill="#ede9df" stroke="#2e6fd4" stroke-width="1.5"/>
+        <text x="205" y="78" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="#0b0c0f" text-anchor="middle">Python</text>
+        <text x="205" y="92" font-family="DM Mono,monospace" font-size="7" fill="#6b6760" text-anchor="middle">FastAPI · NLP</text>
+        <text x="205" y="103" font-family="DM Mono,monospace" font-size="7" fill="#6b6760" text-anchor="middle">Text-to-SQL</text>
+        <line x1="205" y1="105" x2="205" y2="155" stroke="#2e6fd4" stroke-width="1" stroke-dasharray="3 3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- HERO STATS -->
+<div style="background:var(--paper);padding:2rem 6rem;display:flex;gap:4rem;border-top:1px solid var(--border);">
+  <div class="stat reveal">
+    <div class="stat-num">40<span>%</span></div>
+    <div class="stat-label">Processing Time Reduced</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">100<span>M+</span></div>
+    <div class="stat-label">Rows Queried</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">15<span>+</span></div>
+    <div class="stat-label">ETL Pipelines Built</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">2<span>yrs</span></div>
+    <div class="stat-label">at Accordion</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-inner">
+    Azure Data Factory &nbsp;·&nbsp; Azure Synapse Analytics &nbsp;·&nbsp; Microsoft Fabric &nbsp;·&nbsp; Power BI &nbsp;·&nbsp; T-SQL &nbsp;·&nbsp; Python &nbsp;·&nbsp; ETL / ELT &nbsp;·&nbsp; Star Schema &nbsp;·&nbsp; Data Warehousing &nbsp;·&nbsp; ADLS Gen2 &nbsp;·&nbsp; FastAPI &nbsp;·&nbsp; LLM Integration &nbsp;·&nbsp; CI/CD &nbsp;·&nbsp; Azure DevOps &nbsp;·&nbsp;
+    Azure Data Factory &nbsp;·&nbsp; Azure Synapse Analytics &nbsp;·&nbsp; Microsoft Fabric &nbsp;·&nbsp; Power BI &nbsp;·&nbsp; T-SQL &nbsp;·&nbsp; Python &nbsp;·&nbsp; ETL / ELT &nbsp;·&nbsp; Star Schema &nbsp;·&nbsp; Data Warehousing &nbsp;·&nbsp; ADLS Gen2 &nbsp;·&nbsp; FastAPI &nbsp;·&nbsp; LLM Integration &nbsp;·&nbsp; CI/CD &nbsp;·&nbsp; Azure DevOps &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work History</div>
+  <h2 class="section-title">Where I've <em>Built</em> Things</h2>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-period">July 2025 – Present</div>
+      <div class="exp-title">Data Engineer II</div>
+      <div class="exp-company">Accordion &nbsp;·&nbsp; Hyderabad, India</div>
+      <ul class="exp-items">
+        <li>Designed and optimized 10+ scalable data pipelines using Azure Data Factory and ADLS Gen2, cutting processing time by 40%</li>
+        <li>Engineered a Text-to-SQL analytics platform using FastAPI and LLMs — reduced ad-hoc SQL requests by 60%</li>
+        <li>Developed 5+ enterprise Power BI dashboards; reduced report load times by 50% via optimized DAX and star schema modeling</li>
+        <li>Delivered end-to-end retail analytics on Microsoft Fabric, cutting reporting turnaround from days to under 2 hours</li>
+      </ul>
+      <span class="exp-highlight">Promoted top 10% of cohort within 1 year</span>
+    </div>
+    <div class="exp-card blue reveal">
+      <div class="exp-period">May 2024 – June 2025</div>
+      <div class="exp-title">Data Engineer I</div>
+      <div class="exp-company">Accordion &nbsp;·&nbsp; Hyderabad, India</div>
+      <ul class="exp-items">
+        <li>Architected centralized data warehouse on Azure Synapse Analytics — star schema supporting 100M+ rows with 45% query improvement</li>
+        <li>Built 15+ automated ETL/ELT pipelines from REST APIs, Excel, and cloud storage — reduced manual ingestion by 70%</li>
+        <li>Implemented CI/CD with Azure DevOps — cut release cycle time by 50%, eliminated deployment errors</li>
+        <li>Automated approval workflows via Power Apps & Power Automate for 200+ monthly requests</li>
+      </ul>
+      <span class="exp-highlight" style="background:rgba(46,111,212,0.15);color:#6aa3e8;">First role · immediate impact</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Arsenal</div>
+  <h2 class="section-title">What I <em>Work With</em></h2>
+  <div class="skills-grid">
+    <div class="skill-block reveal">
+      <span class="skill-icon">⚙️</span>
+      <div class="skill-block-title">Data Engineering & Pipelines</div>
+      <div class="skill-tags">
+        <span class="tag hot">Azure Data Factory</span>
+        <span class="tag hot">Azure Synapse</span>
+        <span class="tag hot">Microsoft Fabric</span>
+        <span class="tag">ADLS Gen2</span>
+        <span class="tag">ETL / ELT</span>
+        <span class="tag">REST API Integration</span>
+        <span class="tag">Data Lakehouse</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <span class="skill-icon">🗄️</span>
+      <div class="skill-block-title">Databases & Warehousing</div>
+      <div class="skill-tags">
+        <span class="tag hot">Azure SQL Database</span>
+        <span class="tag hot">MS SQL Server</span>
+        <span class="tag">Dedicated SQL Pools</span>
+        <span class="tag">Serverless SQL Pools</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Star Schema Modeling</span>
+        <span class="tag">Dimensional Modeling</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <span class="skill-icon">📊</span>
+      <div class="skill-block-title">Business Intelligence</div>
+      <div class="skill-tags">
+        <span class="tag hot">Power BI</span>
+        <span class="tag hot">DAX</span>
+        <span class="tag">Semantic Modeling</span>
+        <span class="tag">Composite Models</span>
+        <span class="tag">DirectQuery</span>
+        <span class="tag">Import Aggregations</span>
+        <span class="tag">Tabular Editor</span>
+        <span class="tag">DAX Studio</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <span class="skill-icon">🐍</span>
+      <div class="skill-block-title">Programming</div>
+      <div class="skill-tags">
+        <span class="tag hot">Python</span>
+        <span class="tag hot">SQL (T-SQL)</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">NLP / LLM Integration</span>
+        <span class="tag">Data Transformation</span>
+        <span class="tag">Feature Engineering</span>
+        <span class="tag">EDA</span>
+        <span class="tag">C++</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <span class="skill-icon">☁️</span>
+      <div class="skill-block-title">Cloud & Automation</div>
+      <div class="skill-tags">
+        <span class="tag hot">Microsoft Azure</span>
+        <span class="tag">Azure Function Apps</span>
+        <span class="tag">Logic Apps</span>
+        <span class="tag">Azure Key Vault</span>
+        <span class="tag">Power Automate</span>
+        <span class="tag">Power Apps</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <span class="skill-icon">🔄</span>
+      <div class="skill-block-title">DevOps & Version Control</div>
+      <div class="skill-tags">
+        <span class="tag hot">Azure DevOps</span>
+        <span class="tag hot">CI/CD Pipelines</span>
+        <span class="tag">Git</span>
+        <span class="tag">Automated Deployments</span>
+        <span class="tag">Data Quality & Governance</span>
+        <span class="tag">Query Optimization</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Key Deliverables</div>
+  <h2 class="section-title">High-Impact <em>Projects</em></h2>
+  <div class="projects-grid">
+    <div class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-badge">NLP · FastAPI · LLM</div>
+      <div class="proj-title">Text-to-SQL Analytics Platform</div>
+      <p class="proj-desc">Built a self-service analytics interface using FastAPI and large language models, allowing non-technical stakeholders to query data using plain English — no SQL required.</p>
+      <div class="proj-impact"><span>60%</span> fewer</div>
+      <div class="proj-impact-label">Ad-hoc SQL requests to data team</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">02</div>
+      <div class="proj-badge">Microsoft Fabric · Power BI</div>
+      <div class="proj-title">Retail Analytics Solution on Fabric</div>
+      <p class="proj-desc">End-to-end retail analytics on Microsoft Fabric (Lakehouse, Warehouse, Semantic Models), consolidating 3+ data sources with a complete reporting layer.</p>
+      <div class="proj-impact">Days <span>→</span> &lt;2hrs</div>
+      <div class="proj-impact-label">Reporting turnaround time</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">03</div>
+      <div class="proj-badge">Azure Synapse · T-SQL · Star Schema</div>
+      <div class="proj-title">Enterprise Data Warehouse</div>
+      <p class="proj-desc">Architected a centralized data warehouse on Azure Synapse with optimized star schema modeling, capable of analytical queries across massive datasets at speed.</p>
+      <div class="proj-impact"><span>100M+</span> rows</div>
+      <div class="proj-impact-label">45% query performance improvement</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">04</div>
+      <div class="proj-badge">Power BI · DAX · DirectQuery</div>
+      <div class="proj-title">Enterprise BI Dashboard Suite</div>
+      <p class="proj-desc">5+ enterprise-grade Power BI dashboards built with composite models, Import aggregations over DirectQuery, and optimized DAX measures for business-critical reporting.</p>
+      <div class="proj-impact"><span>3×</span> faster</div>
+      <div class="proj-impact-label">Dashboard refresh speed</div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title">Certifications &<em> Milestones</em></h2>
+  <div class="ach-row">
+    <div class="ach-card reveal">
+      <div class="ach-icon">🏆</div>
+      <div class="ach-title">Microsoft Certified: Azure Data Fundamentals (DP-900)</div>
+      <div class="ach-desc">Validated expertise in cloud data services, Azure SQL, and Azure Synapse Analytics — Microsoft's official data fundamentals credential.</div>
+    </div>
+    <div class="ach-card reveal">
+      <div class="ach-icon">💡</div>
+      <div class="ach-title">HackerRank SQL (Intermediate) Certification</div>
+      <div class="ach-desc">Demonstrated proficiency in complex queries, joins, aggregations, window functions, and advanced analytical SQL patterns.</div>
+    </div>
+    <div class="ach-card reveal">
+      <div class="ach-icon">🚀</div>
+      <div class="ach-title">Promoted to Data Engineer II in 1 Year</div>
+      <div class="ach-desc">Ranked in the top 10% of the cohort at Accordion — recognized for consistently delivering high-impact engineering solutions ahead of schedule.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="edu-left reveal">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">Built on a<br><em>Strong</em> Foundation</h2>
+    <p style="font-size:13px;color:var(--muted);max-width:360px;margin-top:1rem;">A strong engineering background in Information Technology from one of India's premier technical universities — paired with hands-on industry experience from day one.</p>
+  </div>
+  <div class="edu-right reveal">
+    <div class="edu-degree">B.Tech, Information Technology</div>
+    <div class="edu-school">Cochin University of Science and Technology</div>
+    <div class="edu-meta">
+      <span class="edu-chip">2020 – 2024</span>
+      <span class="edu-chip accent">CGPA 8.98 / 10</span>
+      <span class="edu-chip">CUSAT, Kerala</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Open to <em>Opportunities</em></h2>
+  <p class="contact-sub">Looking for roles in Big Data Engineering, Data Analytics, Business Intelligence, or Data Architecture. Let's talk.</p>
+  <div class="contact-links">
+    <a href="mailto:aniketraj180201@gmail.com" class="contact-link">✉ Email Me</a>
+    <a href="https://www.linkedin.com/in/aniket-raj" target="_blank" class="contact-link">LinkedIn ↗</a>
+    <a href="https://www.hackerrank.com/aniket" target="_blank" class="contact-link">HackerRank ↗</a>
+    <a href="tel:+916207753203" class="contact-link">📞 Call</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Aniket Raj &nbsp;·&nbsp; Data Engineer II &nbsp;·&nbsp; Built for impact
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
